@@ -20,14 +20,13 @@ services:
   # Django Backend
   backend:
     build:
-      context: ./core
+      context: ./backend
       dockerfile: Dockerfile
     container_name: ryo_backend
     env_file:
-      - ./core/.env
+      - ./backend/.env
     volumes:
-      - ./core/media:/app/media
-      # - static_volume:/app/staticfiles  # Commented out to test static files in container
+      - ./backend/media:/app/media
     ports:
       - "8081:8080"  # Map host port 8081 to container port 8080
     networks:
@@ -39,7 +38,7 @@ services:
   # React Frontend
   frontend:
     build:
-      context: ./admin-dashboard
+      context: ./frontend
       dockerfile: Dockerfile
       args:
         NODE_ENV: production
