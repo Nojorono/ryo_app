@@ -71,7 +71,7 @@ print_status "Deploying frontend configuration..."
 $SUDO cp ./nginx/ryo-frontend.conf /etc/nginx/sites-available/frontend.conf
 
 print_status "Deploying backend configuration..."
-$SUDO cp ./nginx/ryo-backend.conf /etc/nginx/sites-available/backend.conf
+$SUDO cp ./nginx/ryo-backend-wsl.conf /etc/nginx/sites-available/backend.conf
 
 # Set proper permissions
 $SUDO chmod 644 /etc/nginx/sites-available/frontend.conf
