@@ -1,0 +1,9 @@
+[submodule "backend"]
+    path = backend
+    url = https://github.com/Nojorono/voucher_be.git
+    branch = main
+
+[submodule "frontend"]
+    path = frontend
+    url = https://github.com/Nojorono/voucher_fe.git
+    branch = master
