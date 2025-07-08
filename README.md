@@ -28,4 +28,6 @@ docker-compose up -d --build
 ## to use NGINX ##
 cd nginx 
 cp * /etc/nginx/sites-available/
-ln -s /etc/nginx/sites-available/* /etc/nginx/sites-enabled/ 
+ln -s /etc/nginx/sites-available/* /etc/nginx/sites-enabled/
+nginx -t
+systemctl reload nginx
