@@ -6,11 +6,11 @@ echo "======================"
 
 # Add backend repository as submodule
 echo "📦 Adding backend as submodule..."
-git submodule add https://github.com/Nojorono/voucher_be.git frontend
+git submodule add https://github.com/Nojorono/voucher_be.git backend
 
 # Add frontend as submodule  
 echo "📦 Adding frontend as submodule..."
-git submodule add https://github.com/Nojorono/voucher_fe.git backend
+git submodule add https://github.com/Nojorono/voucher_fe.git frontend
 
 # Initialize and update submodules
 echo "🔄 Initializing submodules..."
