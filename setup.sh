@@ -14,8 +14,8 @@ git submodule add https://github.com/Nojorono/voucher_fe.git backend
 
 # Initialize and update submodules
 echo "🔄 Initializing submodules..."
-git submodule init
-git submodule update
+git submodule update --init --recursive
+git submodule update --remote
 
 # Make scripts executable
 echo "🔧 Making scripts executable..."

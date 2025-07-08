@@ -8,6 +8,7 @@ Complete RYO application with backend API, admin dashboard, and database integra
 - **Frontend**: React Admin Dashboard
 - **Database**: PostgreSQL
 - **Deployment**: Docker Compose
+- **Web Server**: NGINX
 
 ## 🚀 Quick Start
 
@@ -23,3 +24,8 @@ cd ryo_app
 
 # Start application
 docker-compose up -d --build
+
+## to use NGINX ##
+cd nginx 
+cp * /etc/nginx/sites-available/
+ln -s /etc/nginx/sites-available/* /etc/nginx/sites-enabled/ 
