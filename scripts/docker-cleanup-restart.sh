@@ -20,7 +20,7 @@ docker-compose down --remove-orphans || true
 
 # Remove images
 print_status "Removing images..."
-docker rmi ryo_backend ryo_frontend || true
+docker rmi ryo_backend ryo_frontend ryo_postgres || true
 docker rmi program_backend program_frontend || true
 
 # Clean up Docker system
@@ -44,4 +44,4 @@ echo ""
 echo "📋 Next steps:"
 echo "1. Check logs: docker-compose logs -f"
 echo "2. Test frontend: http://localhost:3000"
-echo "3. Test backend: http://localhost:8080/health/"
+echo "3. Test backend: http://localhost:8081/health/"

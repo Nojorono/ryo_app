@@ -26,8 +26,10 @@ cd ryo_app
 docker-compose up -d --build
 
 ## to use NGINX ##
-cd nginx 
-cp * /etc/nginx/sites-available/
-ln -s /etc/nginx/sites-available/* /etc/nginx/sites-enabled/
-nginx -t
-systemctl reload nginx
+./scripts/deploy-nginx.sh
+
+## cleanup restart ##
+./scripts/docker-cleanup-restart.sh
+
+## to check status ##
+./scripts/check-status.sh

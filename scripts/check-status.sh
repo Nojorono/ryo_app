@@ -19,7 +19,7 @@ docker-compose logs --tail=10 frontend 2>/dev/null || echo "Frontend not running
 echo ""
 echo "🌐 Test Endpoints:"
 echo "Testing backend health..."
-curl -s -I http://localhost:8080/health/ 2>/dev/null | head -1 || echo "❌ Backend not responding"
+curl -s -I http://localhost:8081/health/ 2>/dev/null | head -1 || echo "❌ Backend not responding"
 
 echo "Testing frontend..."
 curl -s -I http://localhost:3000 2>/dev/null | head -1 || echo "❌ Frontend not responding"
