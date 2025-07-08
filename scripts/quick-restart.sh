@@ -37,10 +37,10 @@ docker exec ryo_postgres psql -U jagoan2025 -d mkt_ryo -c "SELECT version();" ||
 # 8. Debug static files
 echo "🔍 Debugging static files..."
 echo "Static files directory contents:"
-docker exec ryo_backend ls -la /app/staticfiles/
+docker exec ryo_backend ls -la /app/staticfiles-host/
 
 echo "Admin static files:"
-docker exec ryo_backend ls -la /app/staticfiles/admin/ 2>/dev/null || echo "❌ Admin static files not found"
+docker exec ryo_backend ls -la /app/staticfiles-host/admin/ 2>/dev/null || echo "❌ Admin static files not found"
 
 # 9. Test Django settings
 echo "🔧 Checking Django settings..."
@@ -54,13 +54,13 @@ print(f'DEBUG: {settings.DEBUG}')
 # 10. Test endpoints with correct ports
 echo "🌐 Testing endpoints..."
 
-echo "Django admin:"
-curl -I http://localhost:8081/admin/ 2>/dev/null || echo "❌ Django admin failed"
+echo "Django admin: http://localhost/admin/"
+curl -I http://localhost/admin/ 2>/dev/null || echo "❌ Django admin failed"
 
-echo "Static files test:"
-curl -I http://localhost:8081/staticfiles/admin/css/base.css 2>/dev/null || echo "❌ Static files failed"
+echo "Static files test: http://localhost/staticfiles/admin/css/base.css"
+curl -I http://localhost/staticfiles/admin/css/base.css 2>/dev/null || echo "❌ Static files failed"
 
-echo "Frontend:"
+echo "Frontend: http://localhost:3000/"
 curl -I http://localhost:3000/ 2>/dev/null || echo "❌ Frontend failed"
 
 # 12. Test database connectivity
@@ -88,14 +88,10 @@ echo ""
 echo "✅ Setup completed!"
 echo "🔗 Access points:"
 echo "   - PostgreSQL: localhost:5433 (ryo_postgres container)"
-echo "   - Django Admin: http://localhost:8081/admin/ (admin/Admin123!!)"
-echo "   - Django API: http://localhost:8081/api/"
+echo "   - Django Admin: http://localhost/admin/ (admin/Admin123!!)"
+echo "   - Django API: http://localhost/api/"
 echo "   - React Frontend: http://localhost:3000/"
 echo ""
-echo "📋 Database credentials:"
-echo "   Database: mkt_ryo"
-echo "   Username: jagoan2025"
-echo "   Password: Jag0db@2025"
 echo "   Host: localhost (external) / ryo_postgres (internal)"
 echo "   Port: 5433 (external) / 5432 (internal)"
 echo ""

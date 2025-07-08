@@ -24,7 +24,7 @@ services:
       dockerfile: Dockerfile
     container_name: ryo_backend
     env_file:
-      - ./backend/.env
+      - .env
     volumes:
       - ./backend/media:/app/media
       - static_volume:/app/staticfiles  # Mount static files volume
