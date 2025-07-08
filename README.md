@@ -15,7 +15,7 @@ Complete RYO application with backend API, admin dashboard, and database integra
 
 ```bash
 # Clone with all submodules
-git clone --recursive https://github.com/your-username/ryo_app.git
+git clone --recursive https://github.com/Nojorono/ryo_app.git
 cd ryo_app
 
 # Run setup script
