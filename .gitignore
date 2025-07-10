@@ -7,3 +7,5 @@ __pycache__/
 postgres_data/
 media/
 staticfiles/
+*aws.yml
+*docker-compose-aws.yml

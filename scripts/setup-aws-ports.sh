@@ -20,7 +20,7 @@ sudo chmod -R 755 /var/www/ryo-app
 
 # 3. Deploy Nginx configuration
 echo "⚙️ Deploying Nginx configuration..."
-sudo cp /home/ubuntu/ryo_app/nginx/ryo-backend-aws.conf /etc/nginx/sites-available/ryo-backend-aws
+sudo cp /mnt/d/kerjaan/Marketing/RYO/ryo_app/nginx/ryo-backend-aws.conf /etc/nginx/sites-available/ryo-backend-aws
 sudo ln -sf /etc/nginx/sites-available/ryo-backend-aws /etc/nginx/sites-enabled/
 sudo rm -f /etc/nginx/sites-enabled/default
 
