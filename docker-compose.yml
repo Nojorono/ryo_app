@@ -30,7 +30,7 @@ services:
       - static_volume:/app/staticfiles  # Mount static files volume
       - ./staticfiles:/app/staticfiles-host  # Mount for WSL Nginx access
     ports:
-      - "8080:8080"  # Map host port 8081 to container port 8080
+      - "8081:8080"  # Map host port 8081 to container port 8080
     networks:
       - ryo-network
     depends_on:
@@ -46,7 +46,7 @@ services:
         NODE_ENV: production
     container_name: ryo_frontend
     environment:
-      - REACT_APP_API_URL=http://localhost:8080/api  # Adjusted for local development
+      - REACT_APP_API_URL=http://localhost:8081/api  # Adjusted for local development
     ports:
       - "3000:80"
     restart: unless-stopped
