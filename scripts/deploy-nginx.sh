@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Nginx Configuration Deployment Script for Ubuntu Server
 # This script deploys both frontend and backend Nginx configurations
 
@@ -70,7 +71,7 @@ print_status "Deploying frontend configuration..."
 $SUDO cp ./nginx/ryo-frontend.conf /etc/nginx/sites-available/frontend.conf
 
 print_status "Deploying backend configuration..."
-$SUDO cp ./nginx/ryo-backend.conf /etc/nginx/sites-available/ryo-backend.conf
+$SUDO cp ./nginx/ryo-backend-wsl.conf /etc/nginx/sites-available/backend.conf
 
 # Set proper permissions
 $SUDO chmod 644 /etc/nginx/sites-available/frontend.conf
@@ -132,7 +133,7 @@ echo ""
 echo "📝 Next steps:"
 echo "1. Update domain names in the configuration files:"
 echo "   - Edit /etc/nginx/sites-available/frontend.conf"
-echo "   - Edit /etc/nginx/sites-available/ryo-backend-aws"
+echo "   - Edit /etc/nginx/sites-available/backend.conf"
 echo "   - Replace 'yourdomain.com' and 'api.yourdomain.com' with your actual domains"
 echo ""
 echo "2. Start your Docker containers:"
