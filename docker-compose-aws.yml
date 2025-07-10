@@ -22,7 +22,7 @@ services:
       dockerfile: Dockerfile
     container_name: ryo_backend
     env_file:
-      - .env.aws
+      - .env
     environment:
       - DEBUG=False
       - ALLOWED_HOSTS=10.0.3.222,localhost,127.0.0.1
@@ -30,7 +30,7 @@ services:
       - ./backend/media:/app/media
       - /var/www/ryo-app/staticfiles:/app/staticfiles-host
     ports:
-      - "127.0.0.1:8081:8080"  # Internal Docker port mapping
+      - "127.0.0.1:8082:8080"  # Internal Docker port mapping
     networks:
       - ryo-network
     depends_on:

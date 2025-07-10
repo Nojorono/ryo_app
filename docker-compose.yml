@@ -30,7 +30,7 @@ services:
       - static_volume:/app/staticfiles  # Mount static files volume
       - ./staticfiles:/app/staticfiles-host  # Mount for WSL Nginx access
     ports:
-      - "8081:8080"  # Map host port 8081 to container port 8080
+      - "8082:8080"  # Map host port 8081 to container port 8080
     networks:
       - ryo-network
     depends_on:
