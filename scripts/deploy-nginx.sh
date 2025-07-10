@@ -66,24 +66,24 @@ if [ -f "/etc/nginx/sites-available/backend.conf" ]; then
 fi
 
 # Copy configuration files
-# print_status "Deploying frontend configuration..."
-# $SUDO cp ./nginx/ryo-frontend.conf /etc/nginx/sites-available/frontend.conf
+print_status "Deploying frontend configuration..."
+$SUDO cp ./nginx/ryo-frontend.conf /etc/nginx/sites-available/frontend.conf
 
 print_status "Deploying backend configuration..."
-$SUDO cp ./nginx/ryo-backend-aws.conf /etc/nginx/sites-available/ryo-backend-aws.conf
+$SUDO cp ./nginx/ryo-backend.conf /etc/nginx/sites-available/ryo-backend.conf
 
 # Set proper permissions
-# $SUDO chmod 644 /etc/nginx/sites-available/frontend.conf
-$SUDO chmod 644 /etc/nginx/sites-available/ryo-backend-aws
+$SUDO chmod 644 /etc/nginx/sites-available/frontend.conf
+$SUDO chmod 644 /etc/nginx/sites-available/backend.conf
 
 print_success "Configuration files deployed successfully"
 
 # Enable sites by creating symlinks
 print_status "Enabling frontend site..."
-$SUDO ln -sf /etc/nginx/sites-available/ryo-backend-aws /etc/nginx/sites-enabled/
+$SUDO ln -sf /etc/nginx/sites-available/frontend.conf /etc/nginx/sites-enabled/
 
-# print_status "Enabling backend site..."
-# $SUDO ln -sf /etc/nginx/sites-available/backend.conf /etc/nginx/sites-enabled/
+print_status "Enabling backend site..."
+$SUDO ln -sf /etc/nginx/sites-available/backend.conf /etc/nginx/sites-enabled/
 
 # Disable default Nginx site if it exists
 if [ -f "/etc/nginx/sites-enabled/default" ]; then
@@ -131,7 +131,7 @@ echo "🎉 Deployment completed successfully!"
 echo ""
 echo "📝 Next steps:"
 echo "1. Update domain names in the configuration files:"
-# echo "   - Edit /etc/nginx/sites-available/frontend.conf"
+echo "   - Edit /etc/nginx/sites-available/frontend.conf"
 echo "   - Edit /etc/nginx/sites-available/ryo-backend-aws"
 echo "   - Replace 'yourdomain.com' and 'api.yourdomain.com' with your actual domains"
 echo ""
