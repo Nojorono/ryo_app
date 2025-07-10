@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    container_name: ryo_postgres
+    environment:
+      POSTGRES_DB: ${PSQL_NAME:-mkt_ryo}
+      POSTGRES_USER: ${PSQL_USER:-jagoan2025}
+      POSTGRES_PASSWORD: ${PSQL_PASSWORD:-Jag0db@2025}
+    ports:
+      - 5433:5432  # Only accessible from localhost
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - ryo-network
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: ryo_backend
+    env_file:
+      - .env.aws
+    environment:
+      - DEBUG=False
+      - ALLOWED_HOSTS=10.0.3.222,localhost,127.0.0.1
+    volumes:
+      - ./backend/media:/app/media
+      - /var/www/ryo-app/staticfiles:/app/staticfiles-host
+    ports:
+      - "127.0.0.1:8081:8080"  # Internal Docker port mapping
+    networks:
+      - ryo-network
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: ryo_frontend
+    environment:
+      - REACT_APP_API_URL=http://10.0.3.222:8082/api  # Point to backend on port 8082
+    ports:
+      - "127.0.0.1:3000:80"  # Internal Docker port mapping
+    networks:
+      - ryo-network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+
+networks:
+  ryo-network:
+    driver: bridge
