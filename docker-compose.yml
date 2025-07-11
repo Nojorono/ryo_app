@@ -10,13 +10,13 @@ services:
       POSTGRES_USER: ${PSQL_USER:-postgres}
       POSTGRES_PASSWORD: ${PSQL_PASSWORD:-postgres}
     ports:
-      - "127.0.0.1:5433:5432"  # PostgreSQL for ALB target group port 5433
+      - "5433:5432"  # Expose PostgreSQL on port 5433
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - ryo-network
     restart: unless-stopped
-    
+
   # Django Backend
   backend:
     build:
@@ -27,10 +27,10 @@ services:
       - .env
     volumes:
       - ./backend/media:/app/media
-      - static_volume:/app/staticfiles
-      - ./staticfiles:/app/staticfiles-host
+      - static_volume:/app/staticfiles  # Mount static files volume
+      - ./staticfiles:/app/staticfiles-host  # Mount for WSL Nginx access
     ports:
-      - "127.0.0.1:8082:8080"  # Backend for ALB target group port 8082
+      - "8081:8080"  # Map host port 8081 to container port 8080
     networks:
       - ryo-network
     depends_on:
@@ -46,14 +46,15 @@ services:
         NODE_ENV: production
     container_name: ryo_frontend
     ports:
-      - "127.0.0.1:8080:80"  # Frontend for ALB target group port 8080
+      - "3000:80"
+    restart: unless-stopped
     networks:
       - ryo-network
-    restart: unless-stopped
 
 volumes:
   static_volume:
   postgres_data:
+
 
 networks:
   ryo-network:
