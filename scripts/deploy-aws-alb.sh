@@ -16,7 +16,7 @@ NC='\033[0m' # No Color
 PROJECT_DIR="/path/to/ryo_app"  # Update this path
 NGINX_CONF_SOURCE="./nginx-configs/aws-alb-multiport.conf"
 NGINX_CONF_DEST="/etc/nginx/sites-available/ryo-alb-multiport"
-ALB_DNS_NAME="your-alb-dns-name.us-east-1.elb.amazonaws.com"  # Update this
+ALB_DNS_NAME="kcsi-alb-prod-1476414350.ap-southeast-3.elb.amazonaws.com"  # Update this
 
 echo -e "${BLUE}🚀 RYO AWS ALB Multi-Port Deployment Script${NC}"
 echo "============================================="
@@ -155,7 +155,7 @@ fi
 
 # Reload Nginx
 echo -e "\n${BLUE}🔄 Reloading Nginx${NC}"
-if sudo systemctl reload nginx; then
+if sudo systemctl restart nginx; then
     print_status "Nginx reloaded successfully"
 else
     print_error "Failed to reload Nginx"
