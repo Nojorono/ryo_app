@@ -165,6 +165,44 @@ fi
 # Change to project directory
 cd "$PROJECT_DIR"
 
+# Clean up existing containers and networks
+echo -e "\n${BLUE}🧹 Cleaning up existing containers${NC}"
+docker stop $(docker ps -aq) 2>/dev/null || true
+docker rm $(docker ps -aq) 2>/dev/null || true
+docker network prune -f 2>/dev/null || true
+
+# Kill processes using target ports
+echo -e "\n${BLUE}🔍 Checking and clearing ports${NC}"
+PORTS_TO_CHECK=(8080 8082 5433)
+
+for port in "${PORTS_TO_CHECK[@]}"; do
+    if lsof -i :$port >/dev/null 2>&1; then
+        print_warning "Port $port is in use, attempting to free it..."
+        # Kill docker-proxy processes on this port
+        sudo pkill -f "docker-proxy.*$port" 2>/dev/null || true
+        # Kill any other processes
+        sudo kill -9 $(lsof -t -i :$port) 2>/dev/null || true
+        sleep 2
+        
+        # Check if port is now free
+        if lsof -i :$port >/dev/null 2>&1; then
+            print_error "Port $port is still in use. Manual intervention required."
+            echo "Process using port $port:"
+            lsof -i :$port
+            exit 1
+        else
+            print_status "Port $port is now free"
+        fi
+    else
+        print_status "Port $port is available"
+    fi
+done
+
+# Restart Docker service to ensure clean state
+print_warning "Restarting Docker service for clean state..."
+sudo systemctl restart docker
+sleep 10
+
 # Check if services are already running
 echo -e "\n${BLUE}🐳 Managing Docker services${NC}"
 if docker-compose ps | grep -q "Up"; then
