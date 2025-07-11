@@ -24,6 +24,9 @@ curl -s -I http://localhost:8081/health/ 2>/dev/null | head -1 || echo "❌ Back
 echo "Testing backend API on port 8081..."
 curl -s -I http://localhost:8081/api/ 2>/dev/null | head -1 || echo "❌ Backend API not responding"
 
+echo "Testing backend Admin Page on port 8081..."
+curl -s -I http://localhost/admin/ 2>/dev/null | head -1 || echo "❌ Backend API not responding"
+
 echo "Testing frontend on port 3000..."
 curl -s -I http://localhost:3000 2>/dev/null | head -1 || echo "❌ Frontend not responding"
 
