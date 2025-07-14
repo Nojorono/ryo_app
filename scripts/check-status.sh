@@ -33,19 +33,27 @@ curl -s -I http://localhost:3000 2>/dev/null | head -1 || echo "❌ Frontend not
 echo ""
 echo "🌐 Domain Tests (if domains are configured):"
 echo "Testing frontend domain..."
-curl -s -I http://ryo.kcsi.id 2>/dev/null | head -1 || echo "❌ Frontend domain not accessible"
+curl -s -I http://ryo.localhost 2>/dev/null | head -1 || echo "❌ Frontend domain not accessible"
 
 echo "Testing backend domain..."
-curl -s -I http://apiryo.kcsi.id 2>/dev/null | head -1 || echo "❌ Backend domain not accessible"
+curl -s -I http://apiryo.localhost 2>/dev/null | head -1 || echo "❌ Backend domain not accessible"
 
 echo "Testing backend API via domain..."
-curl -s -I http://apiryo.kcsi.id/api/ 2>/dev/null | head -1 || echo "❌ Backend API via domain not accessible"
+curl -s -I http://apiryo.localhost/api/ 2>/dev/null | head -1 || echo "❌ Backend API via domain not accessible"
 
 echo "Testing backend Admin via domain..."
-curl -s -I http://apiryo.kcsi.id/4dm1n^/ 2>/dev/null | head -1 || echo "❌ Backend Admin via domain not accessible"
+curl -s -I http://apiryo.localhost/4dm1nxXx/ 2>/dev/null | head -1 || echo "❌ Backend Admin via domain not accessible"
 
 echo "Testing static files via domain..."
-curl -s -I http://apiryo.kcsi.id/staticfiles/admin/css/base.css 2>/dev/null | head -1 || echo "❌ Static files not accessible"
+curl -s -I http://apiryo.localhost/staticfiles/admin/css/base.css 2>/dev/null | head -1 || echo "❌ Static files not accessible"
+
+echo ""
+echo "🔍 Debug Information:"
+echo "Testing Django ALLOWED_HOSTS..."
+docker-compose exec backend python -c "from django.conf import settings; print('ALLOWED_HOSTS:', settings.ALLOWED_HOSTS)"
+
+echo "Testing CORS settings..."
+docker-compose exec backend python -c "from django.conf import settings; print('CORS_ALLOWED_ORIGINS:', settings.CORS_ALLOWED_ORIGINS)"
 
 echo ""
 echo "📊 System Information:"
