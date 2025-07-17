@@ -25,8 +25,7 @@ docker rmi -f $(docker images -q ryo_app_backend) 2>/dev/null || true
 
 # Build and start only frontend and backend
 print_status "Building and starting frontend and backend containers..."
-docker-compose build --no-cache frontend backend
-docker-compose up -d frontend backend
+docker-compose build --no-cache frontend backend && docker-compose up -d frontend backend
 
 # Build and start fresh
 # print_status "Building and starting containers..."
