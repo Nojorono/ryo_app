@@ -14,17 +14,15 @@ print_status() { echo -e "${BLUE}[INFO]${NC} $1"; }
 print_success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
 print_warning() { echo -e "${YELLOW}[WARNING]${NC} $1"; }
 
-# Stop and remove containers
-print_status "Stopping containers..."
-docker-compose down --remove-orphans || true
+# Stop and remove only frontend and backend containers
+print_status "Stopping frontend and backend containers..."
+docker-compose stop frontend backend || true
+docker-compose rm -f frontend backend || true
 
-# Remove images
-print_status "Removing images..."
-docker system prune -a -f --volumes || true
-
-# Clean up Docker system
-print_status "Cleaning up Docker system..."
-docker system prune -f
+# Build and start only frontend and backend
+print_status "Building and starting frontend and backend containers..."
+docker-compose build --no-cache frontend backend
+docker-compose up -d frontend backend
 
 # Build and start fresh
 print_status "Building and starting containers..."
