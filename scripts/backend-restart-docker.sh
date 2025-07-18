@@ -16,16 +16,15 @@ print_warning() { echo -e "${YELLOW}[WARNING]${NC} $1"; }
 
 # Stop and remove only frontend and backend containers
 print_status "Stopping frontend and backend containers..."
-docker-compose stop frontend backend || true
-docker-compose rm -f frontend backend || true
+docker-compose stop backend || true
+docker-compose rm -f backend || true
 
 # Remove frontend and backend images
-docker rmi -f $(docker images -q ryo_app_frontend) 2>/dev/null || true
 docker rmi -f $(docker images -q ryo_app_backend) 2>/dev/null || true
 
 # Build and start only frontend and backend
 print_status "Building and starting frontend and backend containers..."
-docker-compose build --no-cache frontend backend && docker-compose up -d frontend backend
+docker-compose build --no-cache backend && docker-compose up -d backend
 
 # Wait a moment
 sleep 5
