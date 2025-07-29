@@ -1,11 +1,11 @@
 [submodule "backend"]
     path = backend
     url = https://github.com/Nojorono/voucher_be.git
-    # branch = main
-    branch = update-wholesales-tree
+    branch = main
+    # branch = update-wholesales-tree
 
 [submodule "frontend"]
     path = frontend
     url = https://github.com/Nojorono/voucher_fe.git
-    # branch = master
-    branch = update-ws-tree
+    branch = master
+    # branch = update-ws-tree
