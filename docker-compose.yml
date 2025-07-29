@@ -24,7 +24,7 @@ services:
       dockerfile: Dockerfile
     container_name: ryo_backend
     env_file:
-      - .env
+      - ./backend/.env
     volumes:
       - ./backend/media:/app/media
       # - static_volume:/app/staticfiles  # Mount static files volume
@@ -45,6 +45,8 @@ services:
       args:
         NODE_ENV: production
     container_name: ryo_frontend
+    env_file:
+      - ./frontend/.env
     ports:
       - "3000:80"
     restart: unless-stopped
