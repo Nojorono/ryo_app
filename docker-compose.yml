@@ -9,6 +9,9 @@ services:
       POSTGRES_DB: ${PSQL_NAME:-ryo_db}
       POSTGRES_USER: ${PSQL_USER:-postgres}
       POSTGRES_PASSWORD: ${PSQL_PASSWORD:-postgres}
+      TZ: Asia/Jakarta
+      PGTZ: Asia/Jakarta
+    command: ["postgres", "-c", "timezone=Asia/Jakarta", "-c", "log_timezone=Asia/Jakarta"]
     ports:
       - "5433:5432"  # Expose PostgreSQL on port 5433
     volumes:
