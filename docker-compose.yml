@@ -16,6 +16,7 @@ services:
       - "5433:5432"  # Expose PostgreSQL on port 5433
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d  # ← Penting ini!
     networks:
       - ryo-network
     restart: unless-stopped
